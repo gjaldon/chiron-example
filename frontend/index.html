@@ -1,0 +1,19 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <title>Chiron</title>
+    <link rel="stylesheet" type="text/css" href="/app.css">
+  </head>
+  <body id="app">
+    <h1>{{title | uppercase}}</h1>
+    <ul>
+      <li v-repeat="todos"
+          v-on="click: done = !done"
+          class="{{done ? 'done' : ''}}">
+          {{content}}
+      </li>
+    </ul>
+  </body>
+  <script src="/app.js"></script>
+</html>
