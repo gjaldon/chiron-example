@@ -19,7 +19,9 @@ paths =
   index_js: ['./src/initialize.coffee']
   build: ['./build/**/*']
   images: ['src/images']
-  templates: ['./src/templates/*.html']
+  templates: ['./src/templates/**/*.html']
+  vendorJS: ['./bower_components/**/*.min.js']
+  vendorCSS: ['./bower_components/**/*.min.css', './bower_components/**/*-min.css']
 
 
 ## Tasks
@@ -31,15 +33,17 @@ gulp.task 'indexHtml', ->
   gulp.src(['index.html']).pipe(gulp.dest('./build'))
 
 gulp.task 'templates', ->
-  gulp.src(paths.templates).pipe(gulp.dest('./build/templates/'))
+  gulp
+  .src(paths.templates, {base: "./src/templates"})
+  .pipe(gulp.dest('./build/templates/'))
 
 gulp.task 'vendorCSS', ->
-  gulp.src(['./bower_components/**/*.min.css', './bower_components/**/*-min.css'])
+  gulp.src(paths.vendorCSS)
   .pipe concat('vendor.css')
   .pipe gulp.dest('./build')
 
 gulp.task 'vendorJS', ->
-  gulp.src(['./bower_components/**/*.min.js'])
+  gulp.src(paths.vendorJS)
   .pipe concat('vendor.js')
   .pipe gulp.dest('./build')
 
@@ -84,6 +88,14 @@ gulp.task 'css', ->
 gulp.task 'watch', ->
   servers = createServers(8080, 35729)
 
+  gulp.watch paths.vendorJS, (e) ->
+    gutil.log(gutil.colors.cyan(e.path), 'changed')
+    gulp.run 'vendorJS'
+
+  gulp.watch paths.vendorCSS, (e) ->
+    gutil.log(gutil.colors.cyan(e.path), 'changed')
+    gulp.run 'vendorCSS'
+
   gulp.watch paths.templates, (e) ->
     gutil.log(gutil.colors.cyan(e.path), 'changed')
     gulp.run 'templates'
@@ -112,8 +124,27 @@ createServers = (port, lrport) ->
   lr = tiny_lr()
   lr.listen lrport, -> gutil.log "LiveReload listening on", lrport
   app = express()
+  app.use (req, res, next) -> redirectToIndex(req, next)
   app.use express.static("./build")
   app.listen port, -> gutil.log "HTTP server listening on", port
 
   lr: lr
   app: app
+
+redirectToIndex = (req, next) ->
+  pathSegments = req.url.split('/')
+  firstLevelNest = pathSegments[1]
+  file = pathSegments.slice(-1)[0]
+  assets = [
+    "app.js"
+    "vendor.js"
+    "vendor.css"
+    "app.css"
+  ]
+
+  if firstLevelNest != "templates" and file in assets
+    req.url = "/#{file}"
+  else if firstLevelNest != "templates"
+    req.url = "/"
+
+  next()
