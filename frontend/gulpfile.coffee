@@ -17,18 +17,21 @@ autoprefixer    = require 'gulp-autoprefixer'
 paths =
   sass: ['src/styles/**/*.sass']
   index_js: ['./src/initialize.coffee']
-  js: ['src/**/*.coffee']
   build: ['./build/**/*']
   images: ['src/images']
+  templates: ['./src/templates/*.html']
 
 
 ## Tasks
 
-gulp.task 'clean', (cb) ->
-  del ['build'], cb
+gulp.task 'clean', ->
+  del ['build'], {force: true}
 
-gulp.task 'copy', ->
-  gulp.src(['*.html']).pipe(gulp.dest('./build'))
+gulp.task 'indexHtml', ->
+  gulp.src(['index.html']).pipe(gulp.dest('./build'))
+
+gulp.task 'templates', ->
+  gulp.src(paths.templates).pipe(gulp.dest('./build/templates/'))
 
 gulp.task 'vendorCSS', ->
   gulp.src(['./bower_components/**/*.min.css', './bower_components/**/*-min.css'])
@@ -81,9 +84,13 @@ gulp.task 'css', ->
 gulp.task 'watch', ->
   servers = createServers(8080, 35729)
 
+  gulp.watch paths.templates, (e) ->
+    gutil.log(gutil.colors.cyan(e.path), 'changed')
+    gulp.run 'templates'
+
   gulp.watch 'index.html', (e) ->
     gutil.log(gutil.colors.cyan(e.path), 'changed')
-    gulp.run 'copy'
+    gulp.run 'indexHtml'
 
   gulp.watch paths.sass, (e) ->
     gutil.log(gutil.colors.cyan(e.path), 'changed')
@@ -95,7 +102,7 @@ gulp.task 'watch', ->
       body:
         files: [e.path]
 
-gulp.task 'default', ['clean', 'copy', 'vendorJS', 'vendorCSS', 'jsWatch', 'css'], ->
+gulp.task 'default', ['clean', 'indexHtml', 'templates', 'vendorJS', 'vendorCSS', 'jsWatch', 'css'], ->
   gulp.start 'watch'
 
 
