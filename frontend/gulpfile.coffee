@@ -11,6 +11,7 @@ sass            = require 'gulp-sass'
 uglify          = require 'gulp-uglify'
 buffer          = require 'gulp-buffer'
 sourcemaps      = require 'gulp-sourcemaps'
+concat          = require 'gulp-concat'
 
 paths =
   sass: ['src/styles/**/*.sass']
@@ -25,8 +26,18 @@ paths =
 gulp.task 'clean', (cb) ->
   del ['build'], cb
 
-gulp.task 'copy', ['clean'], ->
+gulp.task 'copy', ->
   gulp.src(['*.html']).pipe(gulp.dest('./build'))
+
+gulp.task 'vendorCSS', ->
+  gulp.src(['./bower_components/**/*.min.css', './bower_components/**/*-min.css'])
+  .pipe concat('vendor.css')
+  .pipe gulp.dest('./build')
+
+gulp.task 'vendorJS', ->
+  gulp.src(['./bower_components/**/*.min.js'])
+  .pipe concat('vendor.js')
+  .pipe gulp.dest('./build')
 
 gulp.task 'jsWatch', ->
   bundler = watchify(browserify paths.index_js,
@@ -53,7 +64,8 @@ gulp.task 'jsWatch', ->
   rebundle()
 
 gulp.task 'css', ->
-  gulp.src(paths.sass).pipe(sass
+  gulp.src(paths.sass)
+  .pipe(sass
     errLogToConsole: true
     sourceComments : 'normal'
   )
@@ -77,7 +89,7 @@ gulp.task 'watch', ->
       body:
         files: [e.path]
 
-gulp.task 'default', ['copy', 'jsWatch', 'css'], ->
+gulp.task 'default', ['clean', 'copy', 'vendorJS', 'vendorCSS', 'jsWatch', 'css'], ->
   gulp.start 'watch'
 
 

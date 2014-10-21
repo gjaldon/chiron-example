@@ -3,17 +3,28 @@
   <head>
     <meta charset="utf-8">
     <title>Chiron</title>
-    <link rel="stylesheet" type="text/css" href="/app.css">
+    <link rel="stylesheet" type="text/css" href="vendor.css">
+    <link rel="stylesheet" type="text/css" href="app.css">
   </head>
   <body id="app">
-    <h1>{{title | uppercase}}</h1>
-    <ul>
-      <li v-repeat="todos"
-          v-on="click: done = !done"
-          class="{{done ? 'done' : ''}}">
-          {{content}}
-      </li>
-    </ul>
+    <header>
+      <div class="pure-menu pure-menu-open pure-menu-horizontal"
+        <a href="#" class="pure-menu-heading">Chiron</a>
+
+      </div>
+    </header>
+
+    <main>
+      <h1>{{title | uppercase}}</h1>
+      <ul>
+        <li v-repeat="todos"
+            v-on="click: done = !done"
+            class="{{done ? 'done' : ''}}">
+            {{content}}
+        </li>
+      </ul>
+    </main>
   </body>
-  <script src="/app.js"></script>
+  <script src="vendor.js"></script>
+  <script src="app.js"></script>
 </html>
