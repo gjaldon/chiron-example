@@ -7,12 +7,24 @@
     <link rel="stylesheet" type="text/css" href="app.css">
   </head>
   <body id="app">
-    <header>
-      <div class="pure-menu pure-menu-open pure-menu-horizontal"
+    <header class="header">
+      <div class="pure-menu pure-menu-open pure-menu-horizontal">
         <a href="#" class="pure-menu-heading">Chiron</a>
-
       </div>
     </header>
+
+    <div class="sidebar">
+      <nav class="pure-menu pure-menu-open">
+        <ul>
+          <li class="pure-menu-selected"><a href="#">Appointments</a></li>
+          <li><a href="#">Patients</a></li>
+          <li><a href="#">Treatment Plans</a></li>
+          <li><a href="#">Templates</a></li>
+          <li><a href="#">Inventory</a></li>
+          <li><a href="#">Reports</a></li>
+        </ul>
+      </nav>
+    </div>
 
     <main>
       <h1>{{title | uppercase}}</h1>

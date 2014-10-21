@@ -74,6 +74,7 @@ gulp.task 'css', ->
     browsers: ['last 2 versions']
     cascade: false
   )
+  .pipe concat('app.css')
   .pipe if gulp.env.production then minifyCSS() else gutil.noop()
   .pipe gulp.dest('./build')
 
