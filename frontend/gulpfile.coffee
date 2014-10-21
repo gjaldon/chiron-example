@@ -12,6 +12,7 @@ uglify          = require 'gulp-uglify'
 buffer          = require 'gulp-buffer'
 sourcemaps      = require 'gulp-sourcemaps'
 concat          = require 'gulp-concat'
+autoprefixer    = require 'gulp-autoprefixer'
 
 paths =
   sass: ['src/styles/**/*.sass']
@@ -68,6 +69,10 @@ gulp.task 'css', ->
   .pipe(sass
     errLogToConsole: true
     sourceComments : 'normal'
+  )
+  .pipe autoprefixer(
+    browsers: ['last 2 versions']
+    cascade: false
   )
   .pipe if gulp.env.production then minifyCSS() else gutil.noop()
   .pipe gulp.dest('./build')
