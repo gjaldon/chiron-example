@@ -1,5 +1,3 @@
-Vue = require 'vue'
-
 HomeComponent = Vue.component 'home',
   template: Helpers.template 'home'
   data:

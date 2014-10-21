@@ -1,5 +1,4 @@
 App     = window
-Vue     = require 'vue'
 page    = require 'page'
 
 App.Helpers =
