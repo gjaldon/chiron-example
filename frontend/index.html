@@ -16,8 +16,8 @@
     <div class="sidebar">
       <nav class="pure-menu pure-menu-open">
         <ul>
-          <li class="pure-menu-selected"><a href="#">Appointments</a></li>
-          <li><a href="#">Patients</a></li>
+          <li v-class="pure-menu-selected: currentView == 'home'"><a href="/">Appointments</a></li>
+          <li v-class="pure-menu-selected: currentView == 'test'"><a href="/test">Patients</a></li>
           <li><a href="#">Treatment Plans</a></li>
           <li><a href="#">Templates</a></li>
           <li><a href="#">Inventory</a></li>
@@ -26,16 +26,7 @@
       </nav>
     </div>
 
-    <main>
-      <h1>{{title | uppercase}}</h1>
-      <ul>
-        <li v-repeat="todos"
-            v-on="click: done = !done"
-            class="{{done ? 'done' : ''}}">
-            {{content}}
-        </li>
-      </ul>
-    </main>
+    <main v-view="currentView"></main>
   </body>
   <script src="vendor.js"></script>
   <script src="app.js"></script>

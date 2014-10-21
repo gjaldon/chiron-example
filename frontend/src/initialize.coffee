@@ -1,16 +1,25 @@
-Vue   = require 'vue'
+App     = window
+Vue     = require 'vue'
+page    = require 'page'
 
-starter = new Vue
+App.Helpers =
+  template: (name) ->
+    request = new XMLHttpRequest()
+    request.open('GET', "/templates/#{name}.html", false)
+    request.send(null)
+    request.responseText
+
+# App-specific libraries
+
+Home = require './components/home'
+Test = require './components/test'
+
+app = new Vue
   el: "#app"
   data:
-    title: "Chiron start"
-    todos: [
-      {
-        done: true
-        content: "Learn Javascript"
-      }
-      {
-        done: false
-        content: "Learn Vue.js"
-      }
-    ]
+    currentView: 'home'
+
+# Routing
+page '/', (context) -> app.currentView = 'home'
+page '/test', (context) -> app.currentView = 'test'
+page.start()
