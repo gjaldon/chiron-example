@@ -1,0 +1,25 @@
+<h1>Patients</h1>
+
+<table class="pure-table pure-table-horizontal">
+  <thead>
+    <tr>
+      <th>Name</th>
+      <th>Main Contact #</th>
+      <th>Last Visit</th>
+      <th>Actions</th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <tr v-repeat="patients">
+      <td>{{name}}</td>
+      <td>{{mainContact}}</td>
+      <td>{{lastVisit}}</td>
+      <td>
+        <a href="#" class="pure-button">Profile</a>
+        <a href="#" class="pure-button">Treatments</a>
+        <a href="#" class="pure-button">Appointments</a>
+      </td>
+    </tr>
+  </tbody>
+</table>

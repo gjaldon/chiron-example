@@ -11,7 +11,7 @@ App.Helpers =
 # App-specific libraries
 
 Home = require './components/home'
-Test = require './components/test'
+Patients = require './components/patients'
 
 app = new Vue
   el: "#app"
@@ -20,5 +20,5 @@ app = new Vue
 
 # Routing
 page '/', (context) -> app.currentView = 'home'
-page '/test', (context) -> app.currentView = 'test'
+page '/patients', (context) -> app.currentView = 'patients'
 page.start()
