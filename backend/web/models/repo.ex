@@ -7,7 +7,7 @@ defmodule Chiron.Repo do
 
   def all_docs(database) do
     %Response{body: body} = HTTP.get! "#{host_url}/#{database}/_all_docs"
-    JSON.decode!(body)
+    body
   end
 
   def create_doc(database, map) do
@@ -15,7 +15,7 @@ defmodule Chiron.Repo do
     body = Dict.merge(map, %{created_at: now, updated_at: now}) |> JSON.encode!
     header = [{"Content-Type", "application/json"}]
     %Response{body: body} = HTTP.put! "#{host_url}/#{database}", body, header
-    JSON.decode!(body)
+    body
   end
 
   @doc """
@@ -28,6 +28,6 @@ defmodule Chiron.Repo do
     header = [{"Content-Type", "application/json"}]
     url = "#{host_url}/#{database}/_design/#{doc_name}"
     %Response{body: body} = HTTP.put! url, body, header
-    JSON.decode!(body)
+    body
   end
 end
