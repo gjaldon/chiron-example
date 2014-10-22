@@ -15,7 +15,7 @@ defmodule Chiron.Mixfile do
   # Type `mix help compile.app` for more information
   def application do
     [mod: {Chiron, []},
-     applications: [:phoenix, :cowboy, :logger]]
+     applications: [:phoenix, :cowboy, :logger, :httpoison]]
   end
 
   # Specifies your project dependencies
@@ -23,6 +23,8 @@ defmodule Chiron.Mixfile do
   # Type `mix help deps` for examples and options
   defp deps do
     [{:phoenix, github: "phoenixframework/phoenix"},
-     {:cowboy, "~> 1.0"}]
+     {:cowboy, "~> 1.0"},
+     {:httpoison, "~> 0.5"},
+     {:timex, "~> 0.13.0"}]
   end
 end
