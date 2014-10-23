@@ -1,0 +1,46 @@
+.overlay
+  z-index: 1000
+  background: gray
+  opacity: .5
+  position: absolute
+  width: 100%
+  height: 100%
+  top: 0
+  left: 0
+  transition: all 1s ease
+
+  &.v-enter
+    opacity: .5
+  &.v-leave
+    opacity: 0
+
+.modal
+  z-index: 1001;
+  background: white;
+  width: 30%;
+  margin: 0 20%;
+  position: absolute;
+  top: 10%;
+  padding: 0 0 0 100px;
+  border-radius: 10px;
+
+  &.v-enter
+    animation: scalein .5s
+  &.v-leave
+    animation: scaleout .5s
+
+.modal-heading
+  position: relative
+
+  h1
+    display: inline-block
+    margin: 0
+
+.modal-close
+  position: absolute
+  top: 0
+  right: 10px
+  text-decoration: none
+  color: gray
+  font-weight: bold
+  font-size: 20px
