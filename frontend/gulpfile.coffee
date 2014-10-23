@@ -135,6 +135,12 @@ redirectToIndex = (req, next) ->
   pathSegments = req.url.split('/')
   firstLevelNest = pathSegments[1]
   file = pathSegments.slice(-1)[0]
+
+  # For handling paths with query string params
+  queryString = file.split("?")[1]
+  if queryString
+    file = file.split("?")[0]
+
   assets = [
     "app.js"
     "vendor.js"
@@ -142,9 +148,11 @@ redirectToIndex = (req, next) ->
     "app.css"
   ]
 
-  if firstLevelNest != "templates" and file in assets
+  isNotTemplate = firstLevelNest != "templates"
+
+  if isNotTemplate and file in assets
     req.url = "/#{file}"
-  else if firstLevelNest != "templates"
+  else if isNotTemplate
     req.url = "/"
 
   next()

@@ -1,5 +1,5 @@
-App     = window
-page    = require 'page'
+App = window
+page = require 'page'
 
 # TODO: store this in an Env var https://github.com/outaTiME/gulp-replace-task
 App.api_host = "http://localhost:4000/api"
