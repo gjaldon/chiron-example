@@ -5,6 +5,13 @@ page = require 'page'
 App.api_host = "http://localhost:4000/api"
 
 App.Helpers =
+  animationendEvents: [
+    "webkitAnimationEnd"
+    "animationend"
+    "MSAnimationEnd"
+    "oanimationend"
+  ]
+
   template: (name) ->
     @sync_get "/templates/#{name}.html"
 
@@ -18,10 +25,19 @@ App.Helpers =
     request.send(null)
     request.responseText
 
+  addAnimationEndEvent: (elem, handler) ->
+    for event in @animationendEvents
+      elem.addEventListener event, handler
+
+  removeAnimationEndEvent: (elem, handler) ->
+    for event in @animationendEvents
+      elem.removeEventListener event, handler
+
 # App-specific libraries
 Home = require './components/home'
 Patients = require './components/patients'
 Modal = require './directives/modal'
+InputValidate = require './directives/input_validate'
 
 app = new Vue
   el: "#app"

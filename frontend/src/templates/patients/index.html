@@ -33,27 +33,59 @@
     <a href="#" class="modal-close" v-on="click: hideModal">x</a>
   </header>
 
-  <form class="pure-form pure-form-stacked">
+  <form class="pure-form pure-form-aligned">
     <fieldset>
-      <label for="name">Name</label>
-      <input id="name" placeholder="Lastname, First M." type="text"></input>
+      <div class="pure-control-group">
+        <label class="required" for="name">Full Name</label>
+        <input v-input-validate="name" v-model="name" id="name" placeholder="Lastname, First M." type="text"></input>
+      </div>
 
-      <label for="birthdate">Birthdate</label>
-      <input id="birthdate" placeholder="Jan 1, 1985" type="text"></input>
+      <div class="pure-control-group">
+        <label class="required" for="birthdate">Birthdate</label>
+        <input v-model="birthdate" id="birthdate" placeholder="Jan 1, 1985" type="text">
+      </div>
 
-      <label for="main_contact">Main Contact Number</label>
-      <input id="main_contact" placeholder="0919-900-9000" type="text"></input>
+      <div class="pure-control-group">
+        <label class="required" for="main_contact">Main Contact No.</label>
+        <input v-model="main_contact" id="main_contact" placeholder="0915-900-9000" type="text">
+      </div>
 
-      <label>Gender</label>
-      <label for="gender-male" class="pure-radio">
-        <input id="gender-male" type="radio" name="gender" value="male" checked>
-        Male
-      </label>
+      <div class="pure-control-group">
+        <label for="mobile_no">Mobile No.</label>
+        <input v-model="mobile_no" id="mobile_no" placeholder="0915-900-9000" type="text">
+      </div>
 
-      <label for="gender-female" class="pure-radio">
-        <input id="gender-female" type="radio" name="gender" value="female">
-        Female
-      </label>
+      <div class="pure-control-group">
+        <label for="landline">Landline No.</label>
+        <input v-model="landline" id="landline" placeholder="222-2222" type="text">
+      </div>
+
+      <div class="pure-control-group">
+        <label for="email">Email</label>
+        <input v-model="email" id="email" placeholder="john@doe.com" type="email">
+      </div>
+
+      <div class="pure-control-group">
+        <label for="home_address">Home Address</label>
+        <textarea v-model="home_address" id="home_address" placeholder="#10, 1st Street, Matina, Davao City"></textarea>
+      </div>
+
+      <div class="pure-control-group">
+        <label class="required">Gender</label>
+        <label for="gender-male" class="pure-radio form-align-action">
+          <input v-model="gender" id="gender-male" type="radio" name="gender" value="male">
+          Male
+        </label>
+
+        <label for="gender-female" class="pure-radio form-align-action">
+          <input v-model="gender" id="gender-female" type="radio" name="gender" value="female">
+          Female
+        </label>
+      </div>
+
+      <div class="form-controls">
+        <button type="submit" class="pure-button pure-button-primary">Submit</button>
+      </div>
     </fieldset>
   </form>
 </div>
