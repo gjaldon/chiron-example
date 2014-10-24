@@ -19,16 +19,23 @@ App.Helpers =
     request.responseText
 
 # App-specific libraries
-
 Home = require './components/home'
 Patients = require './components/patients'
+Modal = require './directives/modal'
 
 app = new Vue
   el: "#app"
   data:
     currentView: 'home'
+    createPatientForm: false
+  methods:
+    hideModal: (e) ->
+      @createPatientForm = false
 
 # Routing
 page '/', (context) -> app.currentView = 'home'
 page '/patients', (context) -> app.currentView = 'patients'
+page '/patients/new', (context) ->
+  app.currentView = 'patients'
+  app.createPatientForm = true
 page.start()

@@ -4,33 +4,37 @@ module.exports =
       el = @el
       el.className= "modal"
       el.style.display = "none"
-      for event in animationendEvents
-        el.addEventListener event, @endAnimationHandler
+      Helpers.addAnimationEndEvent el, @endAnimationHandler
+      @addOverlay()
 
     update: (value) ->
-      root = @vm.$root.$el
+      overlay = @vm.$root.$el.getElementsByClassName('overlay')[0]
       if value
-        overlay = document.createElement "div"
-        overlay.className = "overlay"
-        overlay.addEventListener "click", => @vm.$root[@key] = false
-        for event in transitionendEvents
-          overlay.addEventListener event, -> @remove()
-        root.appendChild overlay
+        @el.classList.remove "v-leave"
+        overlay.classList.remove "v-leave"
         @el.classList.add "v-enter"
+        overlay.classList.add "v-enter"
         @el.style.display = ""
-      else if overlay = root.getElementsByClassName('overlay')[0]
-          overlay.classList.add "v-leave"
-          @el.classList.add "v-leave"
+        overlay.style.display = ""
+      else
+        @el.classList.add "v-leave"
+        overlay.classList.add "v-leave"
 
-    unbind: () ->
+    unbind: ->
       el = @el
-      for event in animationendEvents
-        el.removeEventListener event, @endAnimationHandler
+      Helpers.removeAnimationEndEvent el, @endAnimationHandler
+      overlay = @vm.$root.$el.getElementsByClassName('overlay')[0]
+      overlay.remove()
 
     endAnimationHandler: ->
       if @classList.contains "v-leave"
         @classList.remove "v-leave"
         @style.display = "none"
 
-animationendEvents = ["webkitAnimationEnd", "animationend", "MSAnimationEnd", "oanimationend"]
-transitionendEvents = ["transitionend", "webkitTransitionEnd", "oTransitionEnd", "MSTransitionEnd"]
+    addOverlay: ->
+      overlay = document.createElement "div"
+      overlay.className = "overlay"
+      overlay.style.display = "none"
+      overlay.addEventListener "click", => @vm.$root[@key] = false
+      Helpers.addAnimationEndEvent overlay, @endAnimationHandler
+      @vm.$root.$el.appendChild overlay

@@ -1,3 +1,5 @@
+$modal-animation-duration: .3s
+
 .overlay
   z-index: 1000
   background: gray
@@ -7,12 +9,11 @@
   height: 100%
   top: 0
   left: 0
-  transition: all 1s ease
 
   &.v-enter
-    opacity: .5
+    animation: overlayfadein $modal-animation-duration
   &.v-leave
-    opacity: 0
+    animation: overlayfadeout $modal-animation-duration
 
 .modal
   z-index: 1001;
@@ -21,26 +22,26 @@
   margin: 0 20%;
   position: absolute;
   top: 10%;
-  padding: 0 0 0 100px;
-  border-radius: 10px;
+  border-radius: .75em;
 
   &.v-enter
-    animation: scalein .5s
+    animation: scalein $modal-animation-duration
   &.v-leave
-    animation: scaleout .5s
+    animation: scaleout $modal-animation-duration
 
 .modal-heading
   position: relative
+  text-align: center
 
   h1
     display: inline-block
-    margin: 0
+    margin: .3em 0
 
 .modal-close
   position: absolute
   top: 0
-  right: 10px
+  right: .5em
   text-decoration: none
   color: gray
   font-weight: bold
-  font-size: 20px
+  font-size: 1.2em

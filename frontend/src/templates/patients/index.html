@@ -1,4 +1,7 @@
-<h1>Patients</h1>
+<header class="page-heading">
+  <h1>Patients</h1>
+  <a href="/patients/new" class="pure-button pure-button-primary">Create Patient</a>
+</header>
 
 <table class="pure-table pure-table-horizontal">
   <thead>
@@ -23,3 +26,34 @@
     </tr>
   </tbody>
 </table>
+
+<div v-modal="createPatientForm">
+  <header class="modal-heading">
+    <h1>Create Patient</h1>
+    <a href="#" class="modal-close" v-on="click: hideModal">x</a>
+  </header>
+
+  <form class="pure-form pure-form-stacked">
+    <fieldset>
+      <label for="name">Name</label>
+      <input id="name" placeholder="Lastname, First M." type="text"></input>
+
+      <label for="birthdate">Birthdate</label>
+      <input id="birthdate" placeholder="Jan 1, 1985" type="text"></input>
+
+      <label for="main_contact">Main Contact Number</label>
+      <input id="main_contact" placeholder="0919-900-9000" type="text"></input>
+
+      <label>Gender</label>
+      <label for="gender-male" class="pure-radio">
+        <input id="gender-male" type="radio" name="gender" value="male" checked>
+        Male
+      </label>
+
+      <label for="gender-female" class="pure-radio">
+        <input id="gender-female" type="radio" name="gender" value="female">
+        Female
+      </label>
+    </fieldset>
+  </form>
+</div>
