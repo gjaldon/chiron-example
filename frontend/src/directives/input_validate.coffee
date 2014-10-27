@@ -3,7 +3,7 @@ module.exports = Vue.directive 'input-validate',
     @input = @el
     @errorDiv = document.createElement "div"
     @errorDiv.className = "input-error v-enter"
-    @errorDiv.textContent = "Follow the format: #{@input.placeholder}"
+    @errorDiv.textContent = @errorMessage()
     @errorDiv.style.display = "none"
     Helpers.addAnimationEndEvent @errorDiv, =>
       if @errorDiv.classList.contains "v-leave"
@@ -11,7 +11,7 @@ module.exports = Vue.directive 'input-validate',
     @input.parentElement.appendChild @errorDiv
 
   update: (value) ->
-    if value and value.match(/[A-Z][a-z]*, [A-Z][a-z]* [A-Z]$/)
+    if @validate(value)
       @input.classList.remove "input-invalid"
       @input.classList.add "input-valid"
       @hideError()
@@ -24,6 +24,13 @@ module.exports = Vue.directive 'input-validate',
       @input.classList.remove "input-valid"
       @hideError()
 
+  validate: (value) ->
+    if (typeof @vm[@arg]) == "object"
+      pattern = @vm[@arg]
+      value?.match(pattern)
+    else if (typeof @vm[@arg]) == "function"
+      @vm[@arg](value)
+
   unbind: (value) ->
     @errorDiv.remove()
 
@@ -33,4 +40,10 @@ module.exports = Vue.directive 'input-validate',
 
   hideError: ->
     @errorDiv?.className = "input-error v-leave"
+
+  errorMessage: ->
+    if customMsg = @input.dataset?.errormessage
+      "Follow the format: #{@input.placeholder} and #{customMsg}"
+    else
+      "Follow the format: #{@input.placeholder}"
 
