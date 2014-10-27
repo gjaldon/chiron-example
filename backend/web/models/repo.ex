@@ -10,6 +10,10 @@ defmodule Chiron.Repo do
     body
   end
 
+  def create_db(name) do
+    HTTP.put! "#{host_url}/#{name}", "", [{"Content-Type", "application/json"}]
+  end
+
   def create_doc(database, map) do
     now = DateFormat.format! Date.now, "{RFC1123}"
     body = Dict.merge(map, %{created_at: now, updated_at: now}) |> JSON.encode!

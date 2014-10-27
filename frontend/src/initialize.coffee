@@ -16,6 +16,7 @@ App.Helpers =
     @sync_get "/templates/#{name}.html"
 
   get_data: (url) ->
+    url = "#{api_host}/#{url}"
     JSON.parse(@sync_get url).rows?.map (object) ->
       object.value
 

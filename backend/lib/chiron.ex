@@ -7,6 +7,7 @@ defmodule Chiron do
     import Supervisor.Spec, warn: false
 
     setup_ets_table
+    Chiron.Patient.setup()
 
     children = [
       # Define workers and child supervisors to be supervised
