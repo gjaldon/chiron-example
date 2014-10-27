@@ -19,6 +19,21 @@ App.Helpers =
     JSON.parse(@sync_get url).rows.map (object) ->
       object.value
 
+  toQueryString: (obj) ->
+    queryString = ""
+    for key, value of object
+      if value then queryString += "#{key}=\"#{value}\"&"
+    "?" + queryString[0..-2]
+
+  sync_post: (url, data) ->
+    request = new XMLHttpRequest()
+    params = @toQueryString(data)
+    request.open("POST", url, false)
+    request.setRequestHeader("Content-type", "application/x-www-form-urlencoded")
+    request.setRequestHeader("Content-length", params.length)
+    request.setRequestHeader("Connection", "close")
+    request.send(params)
+
   sync_get: (url) ->
     request = new XMLHttpRequest()
     request.open('GET', url, false)
@@ -36,6 +51,7 @@ App.Helpers =
 # App-specific libraries
 Home = require './components/home'
 Patients = require './components/patients'
+PatientForm = require './components/patient_form'
 Modal = require './directives/modal'
 InputValidate = require './directives/input_validate'
 

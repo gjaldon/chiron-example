@@ -114,6 +114,7 @@ gulp.task 'watch', ->
       body:
         files: [e.path]
 
+# TODO: ensure to run clean before running all the other tasks]
 gulp.task 'default', ['clean', 'indexHtml', 'templates', 'vendorJS', 'vendorCSS', 'jsWatch', 'css'], ->
   gulp.start 'watch'
 
