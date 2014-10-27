@@ -3,7 +3,7 @@
   <a href="/patients/new" class="pure-button pure-button-primary">Create Patient</a>
 </header>
 
-<table class="pure-table pure-table-horizontal">
+<table v-show="patients" class="pure-table pure-table-horizontal">
   <thead>
     <tr>
       <th>Name</th>
@@ -26,5 +26,7 @@
     </tr>
   </tbody>
 </table>
+
+<p v-show="!patients">You have not created any patient records. Click on the 'Create Patient' button at the top right to create one.</p>
 
 <patient-form></patient-form>

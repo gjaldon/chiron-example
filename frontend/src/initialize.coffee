@@ -16,22 +16,20 @@ App.Helpers =
     @sync_get "/templates/#{name}.html"
 
   get_data: (url) ->
-    JSON.parse(@sync_get url).rows.map (object) ->
+    JSON.parse(@sync_get url).rows?.map (object) ->
       object.value
 
   toQueryString: (obj) ->
     queryString = ""
-    for key, value of object
-      if value then queryString += "#{key}=\"#{value}\"&"
-    "?" + queryString[0..-2]
+    for key, value of obj
+      if value then queryString += "#{key}=#{value}&"
+    queryString[0..-2]
 
   sync_post: (url, data) ->
     request = new XMLHttpRequest()
     params = @toQueryString(data)
-    request.open("POST", url, false)
+    request.open("POST", "#{api_host}/#{url}", false)
     request.setRequestHeader("Content-type", "application/x-www-form-urlencoded")
-    request.setRequestHeader("Content-length", params.length)
-    request.setRequestHeader("Connection", "close")
     request.send(params)
 
   sync_get: (url) ->

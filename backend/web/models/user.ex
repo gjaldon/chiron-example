@@ -3,13 +3,18 @@ defmodule User do
   alias HTTPoison, as: HTTP
   alias Poison, as: JSON
   alias HTTPoison.Response
+  alias Chiron.Repo
+
+  def create(map) do
+    Repo.create_doc("patients", map)
+  end
 
   # TODO: tests for all funcs here
   def all(number \\ 10, options \\ []) do
     query_string = Enum.reduce(options, "",fn ({key, value}, query_string) ->
       query_string <> "&#{key}=#{value}"
     end)
-    url = "#{host_url}/users/_design/admin/_view/all?limit=#{number}#{query_string}"
+    url = "#{host_url}/patients/_design/admin/_view/all?limit=#{number}#{query_string}"
     %Response{body: body} = HTTP.get! url
     body
   end
@@ -25,6 +30,6 @@ defmodule User do
     end.
     """
     map = %{all: %{map: fun}}
-    Repo.create_design_doc("users", "admin", map)
+    Repo.create_design_doc("patients", "admin", map)
   end
 end

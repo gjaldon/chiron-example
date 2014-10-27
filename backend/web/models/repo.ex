@@ -14,8 +14,8 @@ defmodule Chiron.Repo do
     now = DateFormat.format! Date.now, "{RFC1123}"
     body = Dict.merge(map, %{created_at: now, updated_at: now}) |> JSON.encode!
     header = [{"Content-Type", "application/json"}]
-    %Response{body: body} = HTTP.put! "#{host_url}/#{database}", body, header
-    body
+    %Response{body: body} = HTTP.post! "#{host_url}/#{database}", body, header
+    JSON.decode! body
   end
 
   @doc """

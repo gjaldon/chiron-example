@@ -1,4 +1,5 @@
 moment = require 'moment'
+page = require 'page'
 
 module.exports =
   Vue.component 'patient-form',
@@ -13,7 +14,5 @@ module.exports =
         date = moment(value, "MMM D, YYYY", true)
         date.isValid() and date <= moment()
       createPatient: ->
-        queryString = ""
-        for key, value of @patient
-          if value then queryString += "#{key}=\"#{value}\"&"
-        "?" + queryString[0..-2]
+        Helpers.sync_post("patients", @patient)
+        page('/patients')
