@@ -8,17 +8,17 @@
     <fieldset>
       <div class="pure-control-group">
         <label class="required" for="name">Full Name</label>
-        <input v-model="patient.name" v-input-validate="namePattern: patient.name" id="name" placeholder="Lastname, First M" type="text"></input>
+        <input required v-model="patient.name" v-input-validate="namePattern: patient.name" id="name" placeholder="Lastname, First M" type="text"></input>
       </div>
 
       <div class="pure-control-group">
         <label class="required" for="birthdate">Birthdate</label>
-        <input v-model="patient.birthdate" v-input-validate="validateBirthdate: patient.birthdate" data-errormessage="Ensure date input is in the past" id="birthdate" placeholder="Jan 1, 1985" type="text">
+        <input required v-model="patient.birthdate" v-input-validate="validateBirthdate: patient.birthdate" data-errormessage="Ensure date input is in the past" id="birthdate" placeholder="Jan 1, 1985" type="text">
       </div>
 
       <div class="pure-control-group">
         <label class="required" for="main_contact">Main Contact No.</label>
-        <input v-model="patient.main_contact" v-input-validate="mobilePattern: patient.main_contact" id="main_contact" placeholder="0915-900-9000" type="text">
+        <input required v-model="patient.main_contact" v-input-validate="mobilePattern: patient.main_contact" id="main_contact" placeholder="0915-900-9000" type="text">
       </div>
 
       <div class="pure-control-group">
@@ -33,7 +33,7 @@
 
       <div class="pure-control-group">
         <label for="email">Email</label>
-        <input v-model="email" id="patient.email" v-input-validate="emailPattern: patient.email" placeholder="john@doe.com" type="email">
+        <input v-model="patient.email" id="email" v-input-validate="emailPattern: patient.email" placeholder="john@doe.com" type="email">
       </div>
 
       <div class="pure-control-group">
@@ -55,7 +55,7 @@
       </div>
 
       <div class="form-controls">
-        <button v-on="click: createPatient" type="submit" class="pure-button pure-button-primary">Submit</button>
+        <button disabled="{{!formValid}}" v-on="click: createPatient" type="submit" class="pure-button pure-button-primary">Submit</button>
       </div>
     </fieldset>
   </form>

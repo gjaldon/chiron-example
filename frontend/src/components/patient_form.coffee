@@ -14,5 +14,9 @@ module.exports =
         date = moment(value, "MMM D, YYYY", true)
         date.isValid() and date <= moment()
       createPatient: ->
+        # Serialize patient birthdate for consistent format
+        date = moment(@patient.birthdate, "MMM D, YYYY", true)
+        @patient.birthdate = date.format("MMM D, YYYY")
         Helpers.sync_post("patients", @patient)
         page('/patients')
+

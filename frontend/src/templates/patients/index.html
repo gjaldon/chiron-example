@@ -3,7 +3,7 @@
   <a href="/patients/new" class="pure-button pure-button-primary">Create Patient</a>
 </header>
 
-<table v-show="patients" class="pure-table pure-table-horizontal">
+<table v-show="anyPatients()" class="pure-table pure-table-horizontal">
   <thead>
     <tr>
       <th>Name</th>
