@@ -1,3 +1,5 @@
+page = require 'page'
+
 module.exports =
   Vue.directive "modal",
     bind: (value) ->
@@ -31,6 +33,8 @@ module.exports =
       @overlay = document.createElement "div"
       @overlay.className = "overlay"
       @overlay.style.display = "none"
-      @overlay.addEventListener "click", => @vm.$root[@key] = false
+      @overlay.addEventListener "click", =>
+        @vm.$root[@key] = false
+        page(@el.dataset.redirectpath)
       Helpers.addAnimationEndEvent @overlay, @endAnimationHandler
       @vm.$root.$el.appendChild @overlay

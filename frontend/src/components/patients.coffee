@@ -6,6 +6,7 @@ module.exports =
     methods:
       anyPatients: ->
         @patients.length
+
       deletePatient: (tr, id, rev) ->
         patient = tr.$data
         response = Helpers.sync_delete("patients/#{id}", rev)

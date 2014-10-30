@@ -1,6 +1,6 @@
-<div v-modal="createPatientForm">
+<div v-modal="patientForm" data-redirectpath="/patients">
   <header class="modal-heading">
-    <h1>Create Patient</h1>
+    <h1>{{patientId ? 'Edit' : 'Create'}} Patient</h1>
     <a href="#" class="modal-close" v-on="click: hideModal">x</a>
   </header>
 
@@ -55,7 +55,7 @@
       </div>
 
       <div class="form-controls">
-        <button disabled="{{!formValid}}" v-on="click: createPatient" type="submit" class="pure-button pure-button-primary">Submit</button>
+        <button disabled="{{!formValid}}" v-on="click: submitForm" type="submit" class="pure-button pure-button-primary">Submit</button>
       </div>
     </fieldset>
   </form>

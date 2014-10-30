@@ -19,9 +19,8 @@
       <td>{{main_contact}}</td>
       <td>{{birthdate}}</td>
       <td>
-        <a href="#" class="pure-button">Profile</a>
-        <a href="#" class="pure-button">Treatments</a>
-        <a href="#" class="pure-button">Appointments</a>
+        <a href="#" class="pure-button">View Details</a>
+        <a href="/patients/edit/{{_id}}" class="pure-button">Edit</a>
         <a v-on="click: deletePatient(this, _id, _rev)" href="#" class="pure-button">Delete</a>
       </td>
     </tr>
@@ -30,4 +29,4 @@
 
 <p v-show="patients.length == 0">You have not created any patient records. Click on the 'Create Patient' button at the top right to create one.</p>
 
-<patient-form></patient-form>
+<div v-component="patient-form" v-ref="patientForm"></div>

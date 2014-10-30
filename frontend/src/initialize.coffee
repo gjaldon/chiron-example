@@ -65,15 +65,28 @@ app = new Vue
   el: "#app"
   data:
     currentView: 'home'
-    createPatientForm: false
-  methods:
-    hideModal: (e) ->
-      @createPatientForm = false
+    patientForm: false
 
 # Routing
 page '/', (context) -> app.currentView = 'home'
 page '/patients', (context) -> app.currentView = 'patients'
 page '/patients/new', (context) ->
   app.currentView = 'patients'
-  app.createPatientForm = true
+  currentView = app.$.currentView
+  patientForm = currentView.$.patientForm
+  patientForm.patientId = null
+  patientForm.patient = {}
+  app.patientForm = true
+page '/patients/edit/:id', (context) ->
+  app.currentView = 'patients'
+  app.patientForm = true
+  currentView = app.$.currentView
+  patientForm = currentView.$.patientForm
+  patientForm.patientId = context.params.id
+  currentView.patients.every (patient) ->
+    if patient._id == patientForm.patientId
+      patientForm.patient = patient
+      false
+    else
+      true
 page.start()
