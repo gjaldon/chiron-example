@@ -27,12 +27,8 @@ defmodule Chiron do
   end
 
   def api_origin do
-    case Mix.env do
-      :dev -> "*"
-      _ ->
-        [{"api_origin", origin}] = :ets.lookup(:chiron_registry, "api_origin")
-        origin
-    end
+    [{"api_origin", origin}] = :ets.lookup(:chiron_registry, "api_origin")
+    origin
   end
 
   defp setup_ets_table do

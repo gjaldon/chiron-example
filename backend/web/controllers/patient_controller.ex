@@ -17,4 +17,9 @@ defmodule Chiron.PatientController do
     end
     json conn, status, ""
   end
+
+  def destroy(conn, %{"id" => id, "rev" => rev}) do
+    {status, response} = Patient.destroy(id, rev)
+    json conn, status, response
+  end
 end

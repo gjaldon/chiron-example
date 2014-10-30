@@ -22,11 +22,12 @@
         <a href="#" class="pure-button">Profile</a>
         <a href="#" class="pure-button">Treatments</a>
         <a href="#" class="pure-button">Appointments</a>
+        <a v-on="click: deletePatient(this, _id, _rev)" href="#" class="pure-button">Delete</a>
       </td>
     </tr>
   </tbody>
 </table>
 
-<p v-show="!patients">You have not created any patient records. Click on the 'Create Patient' button at the top right to create one.</p>
+<p v-show="!anyPatients()">You have not created any patient records. Click on the 'Create Patient' button at the top right to create one.</p>
 
 <patient-form></patient-form>

@@ -3,3 +3,13 @@ module.exports =
     template: Helpers.template 'patients/index'
     data:
       patients: Helpers.get_data("patients")
+    methods:
+      anyPatients: ->
+        @patients.length
+      deletePatient: (tr, id, rev) ->
+        patient = tr.$data
+        response = Helpers.sync_delete("patients/#{id}", rev)
+        if JSON.parse(response).ok
+          position = @patients.indexOf(patient)
+          if ~position then @patients.splice(position, 1)
+

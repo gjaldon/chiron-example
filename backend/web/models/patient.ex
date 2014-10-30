@@ -11,6 +11,10 @@ defmodule Chiron.Patient do
     Repo.create_doc(@db_name, map)
   end
 
+  def destroy(id, rev) do
+    Repo.destroy_doc(@db_name, id, rev)
+  end
+
   # TODO: tests for all funcs here
   def all(number \\ 10, options \\ []) do
     query_string = Enum.reduce(options, "",fn ({key, value}, query_string) ->
