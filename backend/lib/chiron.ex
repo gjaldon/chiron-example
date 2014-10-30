@@ -43,7 +43,7 @@ defmodule Chiron do
   end
 
   defp store_api_origin do
-    api_origin = System.get_env("API_ORIGIN") || "http://127.0.0.1:8080"
+    api_origin = System.get_env("API_ORIGIN") || "http://localhost:8080"
     :ets.insert(:chiron_registry, {"api_origin", api_origin})
   end
 end

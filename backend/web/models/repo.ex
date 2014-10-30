@@ -16,7 +16,13 @@ defmodule Chiron.Repo do
     now = DateFormat.format! Date.now, "{RFC1123}"
     body = Dict.merge(map, %{created_at: now, updated_at: now}) |> JSON.encode!
     %Response{body: body} = HTTP.post! "#{host_url}/#{database}", body, @header
-    JSON.decode! body
+    status = case JSON.decode!(body) do
+      %{"ok" => true} ->
+        200
+      _ ->
+        500
+    end
+    {status, body}
   end
 
   def destroy_doc(database, id, rev) do

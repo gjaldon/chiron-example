@@ -9,13 +9,8 @@ defmodule Chiron.PatientController do
   end
 
   def create(conn, params) do
-    status = case Patient.create(params) do
-      %{"ok" => true} ->
-        200
-      _ ->
-        500
-    end
-    json conn, status, ""
+    {status, response} = Patient.create(params)
+    json conn, status, response
   end
 
   def destroy(conn, %{"id" => id, "rev" => rev}) do

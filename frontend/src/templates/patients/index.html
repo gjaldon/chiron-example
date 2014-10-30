@@ -28,6 +28,6 @@
   </tbody>
 </table>
 
-<p v-show="!anyPatients()">You have not created any patient records. Click on the 'Create Patient' button at the top right to create one.</p>
+<p v-show="patients.length == 0">You have not created any patient records. Click on the 'Create Patient' button at the top right to create one.</p>
 
 <patient-form></patient-form>
