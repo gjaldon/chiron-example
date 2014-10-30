@@ -10,6 +10,7 @@ defmodule Chiron.Router do
     pipe_through :api
 
     resources "/patients", PatientController
+    options "/*path", CorsController, :index
   end
 
   def cors(conn, []) do
