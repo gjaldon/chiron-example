@@ -8,6 +8,7 @@ module.exports =
         @patients.length
 
       deletePatient: (tr, id, rev) ->
+        event.preventDefault()
         patient = tr.$data
         response = Helpers.sync_delete("patients/#{id}", rev)
         if JSON.parse(response).ok

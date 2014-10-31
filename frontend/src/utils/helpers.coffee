@@ -20,18 +20,24 @@ module.exports =
       if value then queryString += "#{key}=#{value}&"
     queryString[0..-2]
 
+  sync_put: (url, data) ->
+    @sync_request_with_body("PUT", url, data)
+
+  sync_post: (url, data) ->
+    @sync_request_with_body("POST", url, data)
+
+  sync_request_with_body: (method, url, data) ->
+    request = new XMLHttpRequest()
+    params = @toQueryString(data)
+    request.open(method, "#{api_host}/#{url}", false)
+    request.setRequestHeader("Content-type", "application/x-www-form-urlencoded")
+    request.send(params)
+    request.responseText
+
   sync_delete: (url, rev) ->
     request = new XMLHttpRequest()
     request.open("DELETE", "#{api_host}/#{url}?rev=#{rev}", false)
     request.send()
-    request.responseText
-
-  sync_post: (url, data) ->
-    request = new XMLHttpRequest()
-    params = @toQueryString(data)
-    request.open("POST", "#{api_host}/#{url}", false)
-    request.setRequestHeader("Content-type", "application/x-www-form-urlencoded")
-    request.send(params)
     request.responseText
 
   sync_get: (url) ->

@@ -25,7 +25,7 @@ module.exports =
 
       updatePatient: ->
         @serializeBirthdate()
-        Helpers.sync_put("patients/#{@patientId}")
+        Helpers.sync_put("patients/#{@patientId}", @patient)
         page('/patients')
 
       serializeBirthdate: ->

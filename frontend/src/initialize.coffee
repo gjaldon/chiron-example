@@ -20,7 +20,9 @@ app = new Vue
 
 # Routing
 page '/', (context) -> app.currentView = 'home'
-page '/patients', (context) -> app.currentView = 'patients'
+page '/patients', (context) ->
+  app.currentView = 'patients'
+  app.patientForm = false
 page '/patients/new', (context) ->
   app.currentView = 'patients'
   currentView = app.$.currentView
