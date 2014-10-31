@@ -36,6 +36,19 @@ defmodule Chiron.Repo do
     {status, body}
   end
 
+  def update_doc(database, %{"_id" => id} = map) do
+    now = DateFormat.format! Date.now, "{RFC1123}"
+    body = Dict.merge(map, %{created_at: now, updated_at: now}) |> JSON.encode!
+    %Response{body: body} = HTTP.put! "#{host_url}/#{database}/#{id}", body, @header
+    status = case JSON.decode!(body) do
+      %{"ok" => true} ->
+        200
+      _ ->
+        500
+    end
+    {status, body}
+  end
+
   def create_db(name) do
     HTTP.put! "#{host_url}/#{name}", "", [{"Content-Type", "application/json"}]
   end
