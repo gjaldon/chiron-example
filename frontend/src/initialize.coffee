@@ -12,7 +12,7 @@ PatientForm = require './components/patient_form'
 Modal = require './directives/modal'
 InputValidate = require './directives/input_validate'
 
-app = new Vue
+App.app = new Vue
   el: "#app"
   data:
     currentView: 'home'

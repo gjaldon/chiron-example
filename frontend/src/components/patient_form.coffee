@@ -16,11 +16,16 @@ module.exports =
         date.isValid() and date <= moment()
 
       submitForm: ->
+        event.preventDefault()
         if @patientId then @updatePatient() else @createPatient()
 
       createPatient: ->
         @serializeBirthdate()
         Helpers.sync_post("patients", @patient)
+        patients = app.$.currentView.patients
+        patients.push(@patient)
+        patients.sort (currentPatient, prevPatient) ->
+          currentPatient.name > prevPatient.name
         page('/patients')
 
       updatePatient: ->
