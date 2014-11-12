@@ -12,7 +12,7 @@
 
       <header class="header">
         <div class="pure-menu pure-menu-open pure-menu-horizontal">
-          <a href="#" class="pure-menu-heading">Chiron</a>
+          {{#link-to 'index' class="pure-menu-heading"}}Chiron{{/link-to}}</a>
         </div>
       </header>
 
@@ -20,7 +20,7 @@
         <nav class="pure-menu pure-menu-open">
           <ul>
             <li><a href="/">Appointments</a></li>
-            <li><a href="/patients">Patients</a></li>
+            <li>{{#link-to 'patients'}}Patients{{/link-to}}</li>
             <li><a href="#">Treatment Plans</a></li>
             <li><a href="#">Templates</a></li>
             <li><a href="#">Inventory</a></li>
@@ -33,6 +33,10 @@
     </script>
 
     <script type="text/x-handlebars" data-template-name="index">
+      Index!
+    </script>
+
+    <script type="text/x-handlebars" data-template-name="patients">
       <header class="page-heading">
         <h1>Patients</h1>
         <a href="/patients/new" class="pure-button pure-button-primary">Create Patient</a>
@@ -49,7 +53,7 @@
           </thead>
 
           <tbody>
-            {{#each patient in model}}
+            {{#each patient in controller itemController="patient"}}
               <tr>
                 <td>{{patient.name}}</td>
                 <td>{{patient.main_contact}}</td>
@@ -57,7 +61,7 @@
                 <td>
                   <a href="#" class="pure-button">View Details</a>
                   <a href="#" class="pure-button">Edit</a>
-                  <a href="#" class="pure-button">Delete</a>
+                  <button {{action "deletePatient"}} class="pure-button">Delete</button>
                 </td>
               </tr>
             {{/each}}
