@@ -16,11 +16,15 @@ autoprefixer    = require 'gulp-autoprefixer'
 
 paths =
   sass: ['src/styles/**/*.sass']
-  index_js: ['./src/initialize.coffee']
+  app: ['./src/app.coffee']
   build: ['./build/**/*']
   images: ['src/images']
   templates: ['./src/templates/**/*.html']
-  vendorJS: ['./bower_components/**/*.min.js']
+  vendorJS: [
+    './bower_components/jquery/dist/jquery.min.js'
+    './bower_components/handlebars/handlebars.min.js'
+    './bower_components/ember/ember.min.js'
+  ]
   vendorCSS: ['./bower_components/**/*.min.css', './bower_components/**/*-min.css']
 
 
@@ -48,7 +52,7 @@ gulp.task 'vendorJS', ->
   .pipe gulp.dest('./build')
 
 gulp.task 'jsWatch', ->
-  bundler = watchify(browserify paths.index_js,
+  bundler = watchify(browserify paths.app,
     cache: {}
     packageCache: {}
     fullPaths: true
@@ -58,13 +62,13 @@ gulp.task 'jsWatch', ->
 
   rebundle = ->
     bundler
-    .bundle()
-    .pipe source('app.js')
-    .pipe buffer()
-    .pipe if gulp.env.production then sourcemaps.init(loadMaps: true) else gutil.noop()
-    .pipe if gulp.env.production then uglify() else gutil.noop()
-    .pipe if gulp.env.production then sourcemaps.write './' else gutil.noop()
-    .pipe gulp.dest('./build')
+      .bundle()
+      .pipe source('app.js')
+      .pipe buffer()
+      .pipe if gulp.env.production then sourcemaps.init(loadMaps: true) else gutil.noop()
+      .pipe if gulp.env.production then uglify() else gutil.noop()
+      .pipe if gulp.env.production then sourcemaps.write './' else gutil.noop()
+      .pipe gulp.dest('./build')
 
   bundler.on 'update', rebundle
   bundler.on 'log', (msg) -> gutil.log(msg)

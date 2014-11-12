@@ -7,27 +7,66 @@
     <link rel="stylesheet" type="text/css" href="vendor.css">
     <link rel="stylesheet" type="text/css" href="app.css">
   </head>
-  <body id="app">
-    <header class="header">
-      <div class="pure-menu pure-menu-open pure-menu-horizontal">
-        <a href="#" class="pure-menu-heading">Chiron</a>
+  <body>
+    <script type="text/x-handlebars" data-template-name="application">
+
+      <header class="header">
+        <div class="pure-menu pure-menu-open pure-menu-horizontal">
+          <a href="#" class="pure-menu-heading">Chiron</a>
+        </div>
+      </header>
+
+      <div class="sidebar">
+        <nav class="pure-menu pure-menu-open">
+          <ul>
+            <li><a href="/">Appointments</a></li>
+            <li><a href="/patients">Patients</a></li>
+            <li><a href="#">Treatment Plans</a></li>
+            <li><a href="#">Templates</a></li>
+            <li><a href="#">Inventory</a></li>
+            <li><a href="#">Reports</a></li>
+          </ul>
+        </nav>
       </div>
-    </header>
 
-    <div class="sidebar">
-      <nav class="pure-menu pure-menu-open">
-        <ul>
-          <li v-class="pure-menu-selected: currentView == 'home'"><a href="/">Appointments</a></li>
-          <li v-class="pure-menu-selected: currentView == 'patients'"><a href="/patients">Patients</a></li>
-          <li><a href="#">Treatment Plans</a></li>
-          <li><a href="#">Templates</a></li>
-          <li><a href="#">Inventory</a></li>
-          <li><a href="#">Reports</a></li>
-        </ul>
-      </nav>
-    </div>
+      <main>{{outlet}}</main>
+    </script>
 
-    <main v-view="currentView" v-ref="currentView"></main>
+    <script type="text/x-handlebars" data-template-name="index">
+      <header class="page-heading">
+        <h1>Patients</h1>
+        <a href="/patients/new" class="pure-button pure-button-primary">Create Patient</a>
+      </header>
+
+      <table class="pure-table pure-table-horizontal">
+        <thead>
+          <tr>
+            <th>Name</th>
+            <th>Main Contact #</th>
+            <th>Birthdate</th>
+            <th>Actions</th>
+          </tr>
+        </thead>
+
+        <tbody>
+          <tr>
+            <td>{{name}}</td>
+            <td>{{main_contact}}</td>
+            <td>{{birthdate}}</td>
+            <td>
+              <a href="#" class="pure-button">View Details</a>
+              <a href="#" class="pure-button">Edit</a>
+              <a href="#" class="pure-button">Delete</a>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+
+      <p>
+        You have not created any patient records. Click on the 'Create Patient' button at
+        the top right to create one.
+      </p>
+    </script>
   </body>
   <script src="vendor.js"></script>
   <script src="app.js"></script>
