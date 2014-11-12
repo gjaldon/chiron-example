@@ -26,7 +26,9 @@ defmodule Chiron.Patient do
     end)
     url = "#{host_url}/patients/_design/admin/_view/all?limit=#{number}#{query_string}"
     %Response{body: body} = HTTP.get! url
-    body
+    body = JSON.decode! body
+    patients = Enum.map body["rows"], fn (row) -> row["value"] end
+    JSON.encode! %{"patients" => patients}
   end
 
   def setup do

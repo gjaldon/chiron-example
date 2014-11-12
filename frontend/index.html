@@ -37,35 +37,38 @@
         <h1>Patients</h1>
         <a href="/patients/new" class="pure-button pure-button-primary">Create Patient</a>
       </header>
+      {{#if model}}
+        <table class="pure-table pure-table-horizontal">
+          <thead>
+            <tr>
+              <th>Name</th>
+              <th>Main Contact #</th>
+              <th>Birthdate</th>
+              <th>Actions</th>
+            </tr>
+          </thead>
 
-      <table class="pure-table pure-table-horizontal">
-        <thead>
-          <tr>
-            <th>Name</th>
-            <th>Main Contact #</th>
-            <th>Birthdate</th>
-            <th>Actions</th>
-          </tr>
-        </thead>
-
-        <tbody>
-          <tr>
-            <td>{{name}}</td>
-            <td>{{main_contact}}</td>
-            <td>{{birthdate}}</td>
-            <td>
-              <a href="#" class="pure-button">View Details</a>
-              <a href="#" class="pure-button">Edit</a>
-              <a href="#" class="pure-button">Delete</a>
-            </td>
-          </tr>
-        </tbody>
-      </table>
-
-      <p>
-        You have not created any patient records. Click on the 'Create Patient' button at
-        the top right to create one.
-      </p>
+          <tbody>
+            {{#each patient in model}}
+              <tr>
+                <td>{{patient.name}}</td>
+                <td>{{patient.main_contact}}</td>
+                <td>{{patient.birthdate}}</td>
+                <td>
+                  <a href="#" class="pure-button">View Details</a>
+                  <a href="#" class="pure-button">Edit</a>
+                  <a href="#" class="pure-button">Delete</a>
+                </td>
+              </tr>
+            {{/each}}
+          </tbody>
+        </table>
+      {{else}}
+        <p>
+          You have not created any patient records. Click on the 'Create Patient' button at
+          the top right to create one.
+        </p>
+      {{/if}}
     </script>
   </body>
   <script src="vendor.js"></script>

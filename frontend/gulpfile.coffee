@@ -24,6 +24,7 @@ paths =
     './bower_components/jquery/dist/jquery.min.js'
     './bower_components/handlebars/handlebars.min.js'
     './bower_components/ember/ember.min.js'
+    './bower_components/ember-data/ember-data.min.js'
   ]
   vendorCSS: ['./bower_components/**/*.min.css', './bower_components/**/*-min.css']
 

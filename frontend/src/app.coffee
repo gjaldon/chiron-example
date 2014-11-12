@@ -1,7 +1,17 @@
 window.App = Ember.Application.create()
 
+App.ApplicationAdapter = DS.RESTAdapter.extend
+  host: 'http://localhost:4000'
+  namespace: 'api'
+
+require './models/patient'
+
 App.Router.map ->
   @resource 'patients'
+
+App.IndexRoute = Ember.Route.extend
+  model: ->
+    @store.find('patient')
 
 # # Routing
 # page '/', (context) -> app.currentView = 'home'
