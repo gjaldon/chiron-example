@@ -13,6 +13,14 @@ App.ApplicationAdapter = DS.RESTAdapter.extend
 
     set(@, 'headers', headers)
     @ajax(@buildURL(type.typeKey, id, record), "DELETE")
+  updateRecord: (store, type, record) ->
+    data = {}
+    serializer = store.serializerFor(type.typeKey)
+
+    serializer.serializeIntoHash(data, type, record, {includeId: true})
+    id = get(record, 'id')
+    data.patient._rev = record._data._rev
+    @ajax(@buildURL(type.typeKey, id, record), "PUT", {data: data})
 
 App.ApplicationSerializer = DS.RESTSerializer.extend
   primaryKey: '_id'
@@ -20,26 +28,13 @@ App.ApplicationSerializer = DS.RESTSerializer.extend
 require './models/patient'
 require './controllers/patient_controller'
 require './controllers/patients_new_controller'
+require './controllers/patients_edit_controller'
 require './controllers/patients_controller'
 require './routes/patients_route'
 require './routes/patients_new_route'
+require './routes/patients_edit_route'
 
 App.Router.map ->
   @resource 'patients', ->
     @route 'new'
-
-# # Routing
-# page '/', (context) -> app.currentView = 'home'
-# page '/patients/edit/:id', (context) ->
-#   app.currentView = 'patients'
-#   app.patientForm = true
-#   currentView = app.$.currentView
-#   patientForm = currentView.$.patientForm
-#   patientForm.patientId = context.params.id
-#   currentView.patients.every (patient) ->
-#     if patient._id == patientForm.patientId
-#       patientForm.patient = patient
-#       false
-#     else
-#       true
-# page.start()
+    @route 'edit', path: ':patient_id/edit'

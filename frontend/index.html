@@ -60,7 +60,7 @@
                 <td>{{patient.birthdate}}</td>
                 <td>
                   <a href="#" class="pure-button">View Details</a>
-                  <a href="#" class="pure-button">Edit</a>
+                  {{#link-to 'patients.edit' patient class="pure-button"}}Edit{{/link-to}}
                   <button {{action "deletePatient"}} class="pure-button">Delete</button>
                 </td>
               </tr>
@@ -137,6 +137,72 @@
 
             <div class="form-controls">
               <button {{action createPatient}} class="pure-button pure-button-primary">Submit</button>
+            </div>
+          </fieldset>
+        </form>
+      </div>
+    </script>
+
+    <script type="text/x-handlebars" data-template-name="patients/edit">
+      <div class="overlay"></div>
+      <div class="modal">
+        <header class="modal-heading">
+          <h1>Edit Patient</h1>
+          {{#link-to 'patients' class="modal-close"}}x{{/link-to}}
+        </header>
+
+        <form class="pure-form pure-form-aligned">
+          <fieldset>
+            <div class="pure-control-group">
+              <label class="required" for="name">Full Name</label>
+              {{input type="text" value=name id="name" required="true" placeholder="Lastname, First M"}}
+            </div>
+
+            <div class="pure-control-group">
+              <label class="required" for="birthdate">Birthdate</label>
+              {{input type="text" value=birthdate id="birthdate" required="true" placeholder="Jan 1, 1985"}}
+            </div>
+
+            <div class="pure-control-group">
+              <label class="required" for="main-contact">Main Contact No.</label>
+              {{input type="text" value=main_contact id="main-contact" required="true" placeholder="0915-900-9000"}}
+            </div>
+
+            <div class="pure-control-group">
+              <label for="mobile-no">Mobile No.</label>
+              {{input type="text" value=mobile_no id="mobile-no" placeholder="0915-900-9000"}}
+            </div>
+
+            <div class="pure-control-group">
+              <label for="landline">Landline No.</label>
+              {{input type="text" value=landline id="landline" placeholder="222-2222"}}
+            </div>
+
+            <div class="pure-control-group">
+              <label for="email">Email</label>
+              {{input type="text" value=email id="email" placeholder="john@doe.com"}}
+            </div>
+
+            <div class="pure-control-group">
+              <label for="home-address">Home Address</label>
+              {{textarea type="text" value=home_address id="home-address" placeholder="#10 1st Street, Matina, Davao City"}}
+            </div>
+
+            <div class="pure-control-group">
+              <label class="required">Gender</label>
+              <label for="gender-male" class="pure-radio form-align-action">
+                {{input type="radio" value=gender name="gender" value="male"}}
+                Male
+              </label>
+
+              <label for="gender-female" class="pure-radio form-align-action">
+                {{input type="radio" value=gender name="gender" value="female"}}
+                Female
+              </label>
+            </div>
+
+            <div class="form-controls">
+              <button {{action submitForm}} class="pure-button pure-button-primary">Submit</button>
             </div>
           </fieldset>
         </form>

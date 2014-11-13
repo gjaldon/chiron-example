@@ -19,8 +19,8 @@ defmodule Chiron.PatientController do
     json conn, status, response
   end
 
-  def update(conn, params) do
-    {status, response} = Patient.update(params)
+  def update(conn, %{"patient" => attrs}) do
+    {status, response} = Patient.update(attrs)
     json conn, status, response
   end
 end
