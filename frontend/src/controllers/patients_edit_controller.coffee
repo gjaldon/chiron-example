@@ -4,3 +4,6 @@ App.PatientsEditController = Ember.ObjectController.extend
       patient = @get('model')
       patient.save()
       @transitionToRoute 'patients'
+
+    closeModal: ->
+      @transitionToRoute 'patients'

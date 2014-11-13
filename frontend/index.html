@@ -78,27 +78,25 @@
     </script>
 
     <script type="text/x-handlebars" data-template-name="patients/new">
-      <div class="overlay"></div>
-      <div class="modal">
+      {{#modal-dialog action="closeModal"}}
         <header class="modal-heading">
           <h1>Create Patient</h1>
           {{#link-to 'patients' class="modal-close"}}x{{/link-to}}
         </header>
 
         {{partial 'patientForm'}}
-      </div>
+      {{/modal-dialog}}
     </script>
 
     <script type="text/x-handlebars" data-template-name="patients/edit">
-      <div class="overlay"></div>
-      <div class="modal">
+      {{#modal-dialog action="closeModal"}}
         <header class="modal-heading">
           <h1>Edit Patient</h1>
           {{#link-to 'patients' class="modal-close"}}x{{/link-to}}
         </header>
 
         {{partial 'patientForm'}}
-      </div>
+      {{/modal-dialog}}
     </script>
 
     <script type="text/x-handlebars" data-template-name="_patientForm">
@@ -157,6 +155,11 @@
           </div>
         </fieldset>
       </form>
+    </script>
+
+    <script type="text/x-handlebars" id="components/modal-dialog">
+      <div class="overlay" {{action "closeModal"}}></div>
+      <div class="modal">{{yield}}</div>
     </script>
   </body>
   <script src="vendor.js"></script>

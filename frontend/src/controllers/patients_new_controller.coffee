@@ -13,3 +13,6 @@ App.PatientsNewController = Ember.ObjectController.extend
 
       patient.save()
       @transitionToRoute 'patients'
+
+    closeModal: ->
+      @transitionToRoute 'patients'
