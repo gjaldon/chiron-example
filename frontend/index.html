@@ -12,7 +12,7 @@
 
       <header class="header">
         <div class="pure-menu pure-menu-open pure-menu-horizontal">
-          {{#link-to 'index' class="pure-menu-heading"}}Chiron{{/link-to}}</a>
+          {{#link-to 'index' class="pure-menu-heading"}}Chiron{{/link-to}}
         </div>
       </header>
 
@@ -39,7 +39,7 @@
     <script type="text/x-handlebars" data-template-name="patients">
       <header class="page-heading">
         <h1>Patients</h1>
-        <a href="/patients/new" class="pure-button pure-button-primary">Create Patient</a>
+        {{#link-to 'patients.new' class="pure-button pure-button-primary"}}Create Patient{{/link-to}}
       </header>
       {{#if model}}
         <table class="pure-table pure-table-horizontal">
@@ -73,6 +73,74 @@
           the top right to create one.
         </p>
       {{/if}}
+
+      {{outlet modal}}
+    </script>
+
+    <script type="text/x-handlebars" data-template-name="patients/new">
+      <div class="overlay"></div>
+      <div class="modal">
+        <header class="modal-heading">
+          <h1>Create Patient</h1>
+          {{#link-to 'patients' class="modal-close"}}x{{/link-to}}
+        </header>
+
+        <form class="pure-form pure-form-aligned">
+          <fieldset>
+            <div class="pure-control-group">
+              <label class="required" for="name">Full Name</label>
+              {{input type="text" value=newName id="name" required="true" placeholder="Lastname, First M"}}
+            </div>
+
+            <div class="pure-control-group">
+              <label class="required" for="birthdate">Birthdate</label>
+              {{input type="text" value=newBirthdate id="birthdate" required="true" placeholder="Jan 1, 1985"}}
+            </div>
+
+            <div class="pure-control-group">
+              <label class="required" for="main-contact">Main Contact No.</label>
+              {{input type="text" value=newMainContact id="main-contact" required="true" placeholder="0915-900-9000"}}
+            </div>
+
+            <div class="pure-control-group">
+              <label for="mobile-no">Mobile No.</label>
+              {{input type="text" value=newMobileNo id="mobile-no" placeholder="0915-900-9000"}}
+            </div>
+
+            <div class="pure-control-group">
+              <label for="landline">Landline No.</label>
+              {{input type="text" value=newLandline id="landline" placeholder="222-2222"}}
+            </div>
+
+            <div class="pure-control-group">
+              <label for="email">Email</label>
+              {{input type="text" value=newEmail id="email" placeholder="john@doe.com"}}
+            </div>
+
+            <div class="pure-control-group">
+              <label for="home-address">Home Address</label>
+              {{textarea type="text" value=newHomeAddress id="home-address" placeholder="#10 1st Street, Matina, Davao City"}}
+            </div>
+
+            <div class="pure-control-group">
+              <label class="required">Gender</label>
+              <label for="gender-male" class="pure-radio form-align-action">
+                {{input type="radio" value=newGender name="gender" value="male"}}
+                Male
+              </label>
+
+              <label for="gender-female" class="pure-radio form-align-action">
+                {{input type="radio" value=newGender name="gender" value="female"}}
+                Female
+              </label>
+            </div>
+
+            <div class="form-controls">
+              <button {{action createPatient}} class="pure-button pure-button-primary">Submit</button>
+            </div>
+          </fieldset>
+        </form>
+      </div>
     </script>
   </body>
   <script src="vendor.js"></script>

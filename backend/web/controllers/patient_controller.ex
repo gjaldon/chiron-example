@@ -8,8 +8,8 @@ defmodule Chiron.PatientController do
     json conn, Patient.all
   end
 
-  def create(conn, params) do
-    {status, response} = Patient.create(params)
+  def create(conn, %{"patient" => attrs}) do
+    {status, response} = Patient.create(attrs)
     json conn, status, response
   end
 

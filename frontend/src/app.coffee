@@ -9,8 +9,7 @@ App.ApplicationAdapter = DS.RESTAdapter.extend
   deleteRecord: (store, type, record) ->
     id = get(record, 'id')
     rev = record._data._rev
-    headers = get(@, 'headers') || {}
-    headers["If-Match"] = rev
+    headers = {"If-Match": rev}
 
     set(@, 'headers', headers)
     @ajax(@buildURL(type.typeKey, id, record), "DELETE")
@@ -20,26 +19,17 @@ App.ApplicationSerializer = DS.RESTSerializer.extend
 
 require './models/patient'
 require './controllers/patient_controller'
+require './controllers/patients_new_controller'
+require './controllers/patients_controller'
+require './routes/patients_route'
+require './routes/patients_new_route'
 
 App.Router.map ->
-  @resource 'patients'
-
-App.PatientsRoute = Ember.Route.extend
-  model: ->
-    @store.find('patient')
+  @resource 'patients', ->
+    @route 'new'
 
 # # Routing
 # page '/', (context) -> app.currentView = 'home'
-# page '/patients', (context) ->
-#   app.currentView = 'patients'
-#   app.patientForm = false
-# page '/patients/new', (context) ->
-#   app.currentView = 'patients'
-#   currentView = app.$.currentView
-#   patientForm = currentView.$.patientForm
-#   patientForm.patientId = null
-#   patientForm.patient = {}
-#   app.patientForm = true
 # page '/patients/edit/:id', (context) ->
 #   app.currentView = 'patients'
 #   app.patientForm = true
