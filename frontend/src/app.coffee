@@ -25,6 +25,7 @@ App.ApplicationAdapter = DS.RESTAdapter.extend
 App.ApplicationSerializer = DS.RESTSerializer.extend
   primaryKey: '_id'
 
+require './router'
 require './models/patient'
 require './controllers/patient_controller'
 require './controllers/patients_new_controller'
@@ -33,8 +34,3 @@ require './controllers/patients_controller'
 require './routes/patients_route'
 require './routes/patients_new_route'
 require './routes/patients_edit_route'
-
-App.Router.map ->
-  @resource 'patients', ->
-    @route 'new'
-    @route 'edit', path: ':patient_id/edit'
