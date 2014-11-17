@@ -1,0 +1,38 @@
+<header class="page-heading">
+  <h1>Patients</h1>
+  {{#link-to 'patients.new' class="pure-button pure-button-primary"}}Create Patient{{/link-to}}
+</header>
+{{#if model}}
+  <table class="pure-table pure-table-horizontal">
+    <thead>
+      <tr>
+        <th>Name</th>
+        <th>Main Contact #</th>
+        <th>Birthdate</th>
+        <th>Actions</th>
+      </tr>
+    </thead>
+
+    <tbody>
+      {{#each patient in controller itemController="patient"}}
+        <tr>
+          <td>{{patient.name}}</td>
+          <td>{{patient.main_contact}}</td>
+          <td>{{patient.birthdate}}</td>
+          <td>
+            <a href="#" class="pure-button">View Details</a>
+            {{#link-to 'patients.edit' patient class="pure-button"}}Edit{{/link-to}}
+            <button {{action "deletePatient"}} class="pure-button">Delete</button>
+          </td>
+        </tr>
+      {{/each}}
+    </tbody>
+  </table>
+{{else}}
+  <p>
+    You have not created any patient records. Click on the 'Create Patient' button at
+    the top right to create one.
+  </p>
+{{/if}}
+
+{{outlet modal}}

@@ -1,0 +1,20 @@
+<header class="header">
+  <div class="pure-menu pure-menu-open pure-menu-horizontal">
+    {{#link-to 'index' class="pure-menu-heading"}}Chiron{{/link-to}}
+  </div>
+</header>
+
+<div class="sidebar">
+  <nav class="pure-menu pure-menu-open">
+    <ul>
+      <li>{{#link-to 'index'}}Appointments{{/link-to}}</li>
+      <li>{{#link-to 'patients'}}Patients{{/link-to}}</li>
+      <li><a href="#">Treatment Plans</a></li>
+      <li><a href="#">Templates</a></li>
+      <li><a href="#">Inventory</a></li>
+      <li><a href="#">Reports</a></li>
+    </ul>
+  </nav>
+</div>
+
+<main>{{outlet}}</main>

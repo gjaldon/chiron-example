@@ -1,0 +1,53 @@
+<form class="pure-form pure-form-aligned">
+  <fieldset>
+    <div class="pure-control-group">
+      <label class="required" for="name">Full Name</label>
+      {{input type="text" value=name id="name" required="true" placeholder="Lastname, First M"}}
+    </div>
+
+    <div class="pure-control-group">
+      <label class="required" for="birthdate">Birthdate</label>
+      {{input type="text" value=birthdate id="birthdate" required="true" placeholder="Jan 1, 1985"}}
+    </div>
+
+    <div class="pure-control-group">
+      <label class="required" for="main-contact">Main Contact No.</label>
+      {{input type="text" value=main_contact id="main-contact" required="true" placeholder="0915-900-9000"}}
+    </div>
+
+    <div class="pure-control-group">
+      <label for="mobile-no">Mobile No.</label>
+      {{input type="text" value=mobile_no id="mobile-no" placeholder="0915-900-9000"}}
+    </div>
+
+    <div class="pure-control-group">
+      <label for="landline">Landline No.</label>
+      {{input type="text" value=landline id="landline" placeholder="222-2222"}}
+    </div>
+
+    <div class="pure-control-group">
+      <label for="email">Email</label>
+      {{input type="text" value=email id="email" placeholder="john@doe.com"}}
+    </div>
+
+    <div class="pure-control-group">
+      <label for="home-address">Home Address</label>
+      {{textarea type="text" value=home_address id="home-address" placeholder="#10 1st Street, Matina, Davao City"}}
+    </div>
+
+    <div class="pure-control-group">
+      <label class="required">Gender</label>
+      <label for="gender-male" class="pure-radio form-align-action">
+        Male
+      </label>
+
+      <label for="gender-female" class="pure-radio form-align-action">
+        Female
+      </label>
+    </div>
+
+    <div class="form-controls">
+      <button {{action "submitForm"}} class="pure-button pure-button-primary">Submit</button>
+    </div>
+  </fieldset>
+</form>

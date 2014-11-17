@@ -1,0 +1,8 @@
+{{#modal-dialog action="closeModal"}}
+  <header class="modal-heading">
+    <h1>Create Patient</h1>
+    {{#link-to 'patients' class="modal-close"}}x{{/link-to}}
+  </header>
+
+  {{partial 'patients/form'}}
+{{/modal-dialog}}
