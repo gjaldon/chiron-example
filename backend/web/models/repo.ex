@@ -16,37 +16,34 @@ defmodule Chiron.Repo do
     now = DateFormat.format! Date.now, "{RFC1123}"
     body = Dict.merge(map, %{created_at: now, updated_at: now}) |> JSON.encode!
     %Response{body: body} = HTTP.post! "#{host_url}/#{database}", body, @header
-    status = case JSON.decode!(body) do
+    case JSON.decode!(body) do
       %{"ok" => true} ->
-        200
+        {200, ""}
       _ ->
-        500
+        {500, body}
     end
-    {status, body}
   end
 
   def destroy_doc(database, id, rev) do
     %Response{body: body} = HTTP.delete! "#{host_url}/#{database}/#{id}?rev=#{rev}"
-    status = case JSON.decode!(body) do
+    case JSON.decode!(body) do
       %{"ok" => true} ->
-        200
+        {200, ""}
       _ ->
-        500
+        {500, body}
     end
-    {status, body}
   end
 
   def update_doc(database, %{"_id" => id} = map) do
     now = DateFormat.format! Date.now, "{RFC1123}"
     body = Dict.merge(map, %{created_at: now, updated_at: now}) |> JSON.encode!
     %Response{body: body} = HTTP.put! "#{host_url}/#{database}/#{id}", body, @header
-    status = case JSON.decode!(body) do
+    case JSON.decode!(body) do
       %{"ok" => true} ->
-        200
+        {200, ""}
       _ ->
-        500
+        {500, body}
     end
-    {status, body}
   end
 
   def create_db(name) do

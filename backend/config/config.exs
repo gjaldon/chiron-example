@@ -24,7 +24,7 @@ config :chiron, :couchdb_host,
   System.get_env("COUCH_DB_HOST") || "http://127.0.0.1:5984"
 
 config :chiron, :api_origin,
-  System.get_env("API_ORIGIN") || "http://localhost:8080"
+  System.get_env("API_ORIGIN") || "http://localhost:4200"
 
 # Configures Elixir's Logger
 config :logger, :console,
