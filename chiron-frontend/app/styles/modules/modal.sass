@@ -1,0 +1,47 @@
+$modal-animation-duration: .3s
+
+.overlay
+  z-index: 1000
+  background: gray
+  opacity: .5
+  position: absolute
+  width: 100%
+  height: 100%
+  top: 0
+  left: 0
+
+  &.animate-enter
+    animation: overlayfadein $modal-animation-duration
+  &.animate-leave
+    animation: overlayfadeout $modal-animation-duration
+
+.modal
+  z-index: 1001;
+  background: white;
+  width: 30%;
+  margin: 0 23%;
+  position: absolute;
+  top: 10%;
+  border-radius: .75em;
+
+  &.animate-enter
+    animation: scalein $modal-animation-duration
+  &.animate-leave
+    animation: scaleout $modal-animation-duration
+
+.modal-heading
+  position: relative
+  text-align: center
+
+  h1
+    display: inline-block
+    margin: .3em 0
+
+.modal-close
+  position: absolute
+  top: 0
+  right: .5em
+  text-decoration: none
+  color: gray
+  font-weight: bold
+  font-size: 1.2em

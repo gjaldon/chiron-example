@@ -1,0 +1,36 @@
+label.pure-radio.form-align-action
+  display: inline
+
+.modal .pure-form-aligned .pure-control-group label
+  width: 8em
+
+.form-controls
+  text-align: center
+  margin-top: 1.25em
+
+.pure-control-group textarea
+  width: 12em
+
+.pure-control-group label.required::after
+  content: "*"
+  color: red
+
+.pure-form input.input-valid,
+.pure-form textarea.input-valid,
+.pure-form input.input-valid:focus,
+.pure-form textarea.input-valid:focus
+  border-color: green
+
+.pure-form input.input-invalid,
+.pure-form textarea.input-invalid,
+.pure-form input.input-invalid:focus,
+.pure-form textarea.input-invalid:focus
+  border-color: red
+
+.input-error
+  color: red
+  text-align: center
+  &.v-enter
+    animation: fadein .3s
+  &.v-leave
+    animation: fadeout .3s
