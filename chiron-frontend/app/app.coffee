@@ -10,9 +10,6 @@ App = Ember.Application.extend
   podModulePrefix: config.podModulePrefix
   Resolver: Resolver
 
-App.ApplicationSerializer = DS.RESTSerializer.extend
-  primaryKey: '_id'
-
 loadInitializers(App, config.modulePrefix)
 
 `export default App`
